@@ -73,8 +73,14 @@ def delete_transaction(transaction_id):
     # Redirect to the transactions list page after deleting the transaction
     return redirect(url_for("get_transactions"))
 
-    app.run(debug=True)
 @app.route("/show_balance")
 def show_balance():
-    sum=0
+    total_balance = 0
+    for transaction in transactions:
+        total_balance += transaction['amount']
+    return f'''<h2>Total Balance: {total_balance}</h2>'''
+
+
+# Run the Flask application
+if __name__ == "__main__":
     app.run(debug=True)
